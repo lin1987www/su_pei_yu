@@ -1,3 +1,3 @@
-define(['./panolens-offline.min'], function () {
+define(['./panolens-offline.min'], function (panolens) {
 
 });
