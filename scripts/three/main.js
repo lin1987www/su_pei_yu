@@ -1,0 +1,3 @@
+define(['./three.min'], function () {
+
+});
