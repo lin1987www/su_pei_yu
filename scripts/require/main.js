@@ -42,19 +42,20 @@ require([
 
         panorama1 = new PANOLENS.ImagePanorama('images/1.jpg');
         panorama1.addEventListener('progress', onProgressUpdate);
-        panorama1.addEventListener('enter-fade-start', function () {
-            viewer.tweenControlCenter(new THREE.Vector3(-4791.4, -470.28, -1315.23), 0);
+        var lookAt1 = new THREE.Vector3(-4791.4, -470.28, -1315.23);
+        panorama1.addEventListener('enter-fade-start', function (event) {
+            viewer.tweenControlCenter(lookAt1, 0);
         });
 
         panorama2 = new PANOLENS.ImagePanorama('images/2.jpg');
         panorama2.addEventListener('progress', onProgressUpdate);
-        panorama2.addEventListener('enter-fade-start', function () {
+        panorama2.addEventListener('enter-fade-start', function (event) {
             viewer.tweenControlCenter(new THREE.Vector3(-3095.97, -69.23, -3914.42), 0);
         });
 
         panorama3 = new PANOLENS.ImagePanorama('images/3.jpg');
         panorama3.addEventListener('progress', onProgressUpdate);
-        panorama3.addEventListener('enter-fade-start', function () {
+        panorama3.addEventListener('enter-fade-start', function (event) {
             viewer.tweenControlCenter(new THREE.Vector3(2154.81, 529.90, 4470.48), 0);
         });
 
@@ -71,14 +72,13 @@ require([
 
         viewer = new PANOLENS.Viewer(
             {
-                output: 'console',
                 container: container,		// A DOM Element container
                 controlBar: true, 			// Vsibility of bottom control bar
                 controlButtons: [],			// Buttons array in the control bar. Default to ['fullscreen', 'setting', 'video']
                 autoHideControlBar: false,		// Auto hide control bar
                 autoHideInfospot: false,			// Auto hide infospots
                 horizontalView: false,			// Allow only horizontal camera control
-                cameraFov: 60,				// Camera field of view in degree
+                cameraFov: 30,				// Camera field of view in degree
                 reverseDragging: false,			// Reverse orbit control direction
                 enableReticle: false,			// Enable reticle for mouseless interaction
                 dwellTime: 1500,			// Dwell time for reticle selection in millisecond
