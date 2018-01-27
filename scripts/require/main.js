@@ -3,20 +3,23 @@ require.config({
     //To get timely, correct error triggers in IE, force a define/shim exports check.
     //enforceDefine: true,
     baseUrl: './scripts',
-    /* paths、shim 必須跟 此資料夾中的 config.js 設定相同，否則最佳化會有問題。 */
     paths: {
-
+        'three_js': 'three/three.min',
+        'three_main': 'three/main',
+        'panolens_js': 'panolens/panolens-offline.modify',
+        'panolens_main': 'panolens/main'
     },
     shim: {
-        'panolens/main': {
-            deps: ['three/main']
-        },
+
+
+
     },
     waitSeconds: 10000
 });
 
 require([
-    'panolens/main',
+    'panolens_main',
+    'three/TrackballControls'
 ], function (m) {
     //setTimeout 可避免 Opera 在DOM尚未完備時 偷跑 
     setTimeout(function () {
@@ -59,11 +62,11 @@ require([
             viewer.tweenControlCenter(new THREE.Vector3(2154.81, 529.90, 4470.48), 0);
         });
 
-        /*
-        infospot = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);
-        infospot.position.set(0, -2000, -5000);
-        panorama1.add(infospot);
-        */
+
+        //infospot = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);
+        //infospot.position.set(0, -2000, -5000);
+        //panorama1.add(infospot);
+
 
         panorama1.link(panorama2, new THREE.Vector3(-4888.91, -86.68, 1029.39));
         panorama2.link(panorama3, new THREE.Vector3(-2967.07, -1298.68, -3797.13));
@@ -85,10 +88,27 @@ require([
                 autoReticleSelect: true,		// Auto select a clickable target after dwellTime
                 viewIndicator: false,			// Adds an angle view indicator in upper left corner
                 indicatorSize: 30,			// Size of View Indicator
-                output: 'console'			// Whether and where to output infospot position. Could be 'console' or 'overlay'
+                // output: 'console'			// Whether and where to output infospot position. Could be 'console' or 'overlay'
             }
         );
         viewer.add(panorama1, panorama2, panorama3);
+
+       
+
+        controls = new THREE.TrackballControls(viewer.camera);
+        controls.rotateSpeed = 1.0;
+        controls.zoomSpeed = 1.2;
+        controls.panSpeed = 0.8;
+        controls.noZoom = false;
+        controls.noPan = false;
+        controls.staticMoving = true;
+        controls.dynamicDampingFactor = 0.3;
+        controls.keys = [65, 83, 68];
+        controls.addEventListener('change', render);
+
+        function render() {
+            viewer.renderer.render(viewer.scene, viewer.camera);
+        }
 
         // Maunal Set Panorama
         var button1 = document.querySelector('#btn1');
@@ -108,4 +128,6 @@ require([
 
 
     }, 0);
+
+
 });

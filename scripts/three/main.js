@@ -1,3 +1,3 @@
-define(['./three.min'], function (three) {
+﻿define(['three_js'], function (three) {
     window.THREE = three;
 });

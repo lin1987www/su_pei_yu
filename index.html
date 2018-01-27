@@ -19,6 +19,46 @@
     <button id="btn1">Panorama1</button>
     <button id="btn2">Panorama2</button>
     <button id="btn3">Panorama3</button>
+    <!-- 相依性載入-->
     <script type="text/javascript" src="scripts/require/require.js" data-main="scripts/require/main"></script>
+    
+    <!-- 最佳化載入
+    <script type="text/javascript" src="scripts/require/require.js"></script>
+    <script type="text/javascript">
+        require.config({
+            baseUrl: 'scripts',
+            paths: {
+                //Comment out this line to go back o loading
+                //the non-optimized main.js source file.
+                'jquery': [
+                    'https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min',
+                    'http://code.jquery.com/jquery-1.9.1.min',
+                    'http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.1.min.js',
+                    //If the CDN location fails, load from this location
+                    './lib/jquery-1.9.1.min'
+                ],
+                'jqueryui': [
+                    'https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min',
+                    //If the CDN location fails, load from this location
+                    './lib/jquery-ui.min'
+                ],
+                'main': '../main_built'
+            },
+            shim: {
+                'jqueryui': {
+                    deps: ['jquery']
+                },
+                'main': {
+                    deps: ['jquery']
+                }
+            }
+
+        });
+        // 注意在合併成一個js檔的時候，paths 設定中為 'empty:'的 module，必須設定在 shim。
+        // 當執行時 iframe 所載入 js 也會一併顯示，請不要搞混了 ，再者 shim 的相依性設定 似乎看不到被載入，但實際HTML上確有載入。
+        // 合併後的js檔 並不會使用原本的 require.config
+        require(["main"]);
+    </script>
+         
 </body>
 </html>
