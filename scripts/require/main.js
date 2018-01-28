@@ -18,8 +18,9 @@ require.config({
 });
 
 require([
+    'three/TrackballControls',
     'panolens_main',
-    'three/TrackballControls'
+
 ], function (m) {
     //setTimeout 可避免 Opera 在DOM尚未完備時 偷跑 
     setTimeout(function () {

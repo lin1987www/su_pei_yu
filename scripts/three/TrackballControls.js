@@ -1,15 +1,9 @@
 ﻿(function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define(['exports', 'three_main'], factory);
-    } else if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
-        // CommonJS
-        factory(exports, require('three_main'));
-    } else {
-        // Browser globals
-        factory({}, root.THREE);
-    }
-}(typeof self !== 'undefined' ? self : this, function (exports, three) {
+    // AMD. Register as an anonymous module.
+    // 內部無其他define  所以匿名是可行的
+    // define(['three_main'], factory);
+    define(['three_main'], factory);
+}(typeof self !== 'undefined' ? self : this, function () {
     'use strict';
 
 
@@ -638,6 +632,7 @@
 
     THREE.TrackballControls.prototype = Object.create(THREE.EventDispatcher.prototype);
     THREE.TrackballControls.prototype.constructor = THREE.TrackballControls;
+
 
 
 }));
