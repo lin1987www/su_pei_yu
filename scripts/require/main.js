@@ -6,7 +6,7 @@ require.config({
     paths: {
         'three_js': 'three/three.min',
         'three_main': 'three/main',
-        'panolens_js': 'panolens/panolens-offline.modify',
+        'panolens_js': 'panolens/panolens.min.modify',
         'panolens_main': 'panolens/main'
     },
     shim: {
@@ -27,7 +27,6 @@ require.config({
 
 require([
 
-    'three/TrackballControls',
     'panolens_main',
 
 ], function (m) {
@@ -41,7 +40,7 @@ require([
             {
                 container: container,		// A DOM Element container
                 controlBar: true, 			// Vsibility of bottom control bar
-                controlButtons: ['fullscreen', 'setting', 'video'],	// Buttons array in the control bar. Default to ['fullscreen', 'setting', 'video']
+                controlButtons: ['fullscreen', 'setting' ,'video'],	// Buttons array in the control bar. Default to ['fullscreen', 'setting', 'video']
                 autoHideControlBar: false,		// Auto hide control bar
                 autoHideInfospot: false,			// Auto hide infospots
                 horizontalView: false,			// Allow only horizontal camera control
@@ -57,11 +56,15 @@ require([
         );
 
 
-        
+        /*
         function render() {
             viewer.renderer.render(viewer.scene, viewer.camera);
         }
-        controls = new THREE.TrackballControls(viewer.camera);
+        function onWindowResize() {
+            controls.handleResize();
+            render();
+        }
+        controls = new THREE.TrackballControls(viewer.camera, viewer.container);
         controls.rotateSpeed = 1.0;
         controls.zoomSpeed = 1.2;
         controls.panSpeed = 0.8;
@@ -71,8 +74,8 @@ require([
         controls.dynamicDampingFactor = 0.3;
         controls.keys = [65, 83, 68];
         controls.addEventListener('change', render);
-        
-
+        window.addEventListener('resize', onWindowResize, false);
+        */
 
         function onProgressUpdate(event) {
             var percentage = event.progress.loaded / event.progress.total * 100;
@@ -115,9 +118,7 @@ require([
 
         viewer.add(panorama1, panorama2, panorama3);
 
-       
-
-
+  
         // Maunal Set Panorama
         var button1 = document.querySelector('#btn1');
         var button2 = document.querySelector('#btn2');
