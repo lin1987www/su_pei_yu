@@ -913,8 +913,8 @@ define('three_main',['three_js'], function (three) {
 });
 (function (root, factory) {
     // AMD. Register as an anonymous module.
-    // 內部無其他define  所以匿名是可行的
-    // define(['three_main'], factory);
+    // 內部無其他define  所以可用匿名module
+    // 相依性必須在此指定，不能使用require.shim 內的定義，require.shim用於指定 module name 的場合
     define('three/TrackballControls',['three_main'], factory);
 }(typeof self !== 'undefined' ? self : this, function () {
     'use strict';
@@ -1552,7 +1552,7 @@ define('three_main',['three_js'], function (three) {
 (function (root, factory) {
 
     // 由於Panolens有內有使用其他 define 因此不能使用匿名module  必須使用明確定義 panolens_js 讓 panolens/main 引用
-    // 當不使用 匿名module時，相依性必須在此指定，不能使用 require.shim 內的定義 
+    // 相依性必須在此指定，不能使用require.shim 內的定義，require.shim用於指定 module name 的場合
     // module name
     define('panolens_js', ['three_main'], factory);
 
@@ -14223,13 +14223,22 @@ require.config({
     },
     shim: {
 
-
+        // 將匿名Module的相依性定義在此，或者利用define定義在獨立的js檔案當中
+        
+        'panolens_js': {
+            deps: ['three_main'],
+            init: function () {
+                alert('');
+            }
+        },
+        
 
     },
     waitSeconds: 10000
 });
 
 require([
+
     'three/TrackballControls',
     'panolens_main',
 

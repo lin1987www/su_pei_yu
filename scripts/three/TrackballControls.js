@@ -1,7 +1,7 @@
 ﻿(function (root, factory) {
     // AMD. Register as an anonymous module.
-    // 內部無其他define  所以匿名是可行的
-    // define(['three_main'], factory);
+    // 內部無其他define  所以可用匿名module
+    // 相依性必須在此指定，不能使用require.shim 內的定義
     define(['three_main'], factory);
 }(typeof self !== 'undefined' ? self : this, function () {
     'use strict';

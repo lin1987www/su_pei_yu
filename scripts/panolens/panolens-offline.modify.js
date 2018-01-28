@@ -1,8 +1,7 @@
 ﻿(function (root, factory) {
 
     // 由於Panolens有內有使用其他 define 因此不能使用匿名module  必須使用明確定義 panolens_js 讓 panolens/main 引用
-    // 當不使用 匿名module時，相依性必須在此指定，不能使用 require.shim 內的定義 
-    // module name
+    // 相依性必須在此指定，不能使用require.shim 內的定義
     define('panolens_js', ['three_main'], factory);
 
 }(typeof self !== 'undefined' ? self : this, function () {
@@ -12653,5 +12652,6 @@
     }, {}, [36]);
 
 
+    // 必須回傳 module
     return PANOLENS;
 }));
