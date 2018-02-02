@@ -16,17 +16,20 @@
         <div id="bar"></div>
     </div>
     <div id="container"></div>
+    <!--
     <button id="btn1">Panorama1</button>
     <button id="btn2">Panorama2</button>
     <button id="btn3">Panorama3</button>
-    <!-- 相依性載入
+    -->
+    <!-- 相依性載入 -->
     <script type="text/javascript" src="scripts/require/require.js" data-main="scripts/require/main"></script>
-    
-    <!-- 最佳化載入-->
+
+    <!-- 最佳化載入
     <script type="text/javascript" src="scripts/require/require.js"></script>
     <script type="text/javascript">
         require.config({
             baseUrl: "scripts",
+            urlArgs: "bust=" + (new Date()).getTime(),
             paths: {
                 //Comment out this line to go back o loading
                 //the non-optimized main.js source file.
@@ -59,6 +62,6 @@
         // 合併後的js檔 並不會使用原本的 require.config
         require(["main"]);
     </script>
-         
+    -->
 </body>
 </html>

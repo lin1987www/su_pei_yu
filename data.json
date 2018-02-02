@@ -1,4 +1,52 @@
 ﻿{
-  "imageBaseUrl": "images/",
-  "images": ["1.jpg","2.jpg","3.jpg", "aaaaaaaaaaa"]
+  "images": [
+    {
+      "name": "1",
+      "lookAt": [ -4925.68, 52.43, 805.79 ]
+    },
+    {
+      "name": "2"
+    },
+    {
+      "name": "3"
+    }
+  ],
+  "linkStyle": {
+    "image": "place.png",
+    "scale": 600
+  },
+  "links": [
+    {
+      "from": "1",
+      "to": "2",
+      "position": [ -3530.09, -3351.63, 1122.96 ],
+      "lookAt": [ -4772.8, -401.03, -1416.27 ]
+    },
+    {
+      "from": "2",
+      "to": "1",
+      "position": [ 3958.57, -2105.15, 2197.59 ],
+      "lookAt": [ 4952.26, 594.52, 160.19 ],
+      "linkStyle": {
+        "image": "video-camera.png",
+        "scale": 600
+      }
+    },
+    {
+      "from": "2",
+      "to": "3",
+      "position": [ -1549.99, -2213.85, -4198.12 ],
+      "lookAt": [ -4538.72, 400.71, 2054.52 ],
+      "linkStyle": {
+        "image": "circumference.png",
+        "scale": 600
+      }
+    },
+    {
+      "from": "3",
+      "to": "2",
+      "position": [ 4011.24, -2188.65, -2009.55 ],
+      "lookAt": [ 702.9, 245.40, 4934.31 ]
+    }
+  ]
 }

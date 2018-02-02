@@ -20,7 +20,7 @@
     if (typeof define === "function" && define.amd) {
         // AMD. Register as an anonymous module.
         define(["exports", "b"], function (exports, b) {
-            factory((root.commonJsStrictGlobal = exports), b);
+            return factory((root.commonJsStrictGlobal = exports), b);
         });
     } else if (typeof exports === "object" && typeof exports.nodeName !== "string") {
         // CommonJS
