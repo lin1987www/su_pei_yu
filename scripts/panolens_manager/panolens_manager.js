@@ -69,7 +69,7 @@
 
         var original_outputInfospotPosition = viewer.outputInfospotPosition;
         viewer.outputInfospotPosition = function () {
-            original_outputInfospotPosition.apply(viewer, arguments);
+            // original_outputInfospotPosition.apply(viewer, arguments);
 
             var intersects, point, panoramaWorldPosition, outputPosition;
             intersects = this.raycaster.intersectObject(this.panorama, true);
@@ -79,10 +79,33 @@
                 point = intersect.point;
                 panoramaWorldPosition = this.panorama.getWorldPosition();
 
-                var camera = this.getCamera();
-                var vFOV = THREE.Math.degToRad(camera.fov); // convert vertical fov to radians
-                var height = 2 * Math.tan(vFOV / 2) * intersect.distance ; // visible height
-                var width = height * camera.aspect;           // visible width
+                // Panorama is scaled -1 on X axis
+                outputPosition = new THREE.Vector3(
+                    -(point.x - panoramaWorldPosition.x).toFixed(2),
+                    (point.y - panoramaWorldPosition.y).toFixed(2),
+                    (point.z - panoramaWorldPosition.z).toFixed(2)
+                );
+                var positionJson = " \"position\":[" + outputPosition.x + ', ' + outputPosition.y + ', ' + outputPosition.z + "]";
+                switch (this.options.output) {
+                    case 'console':
+                        console.info(positionJson);
+                        break;
+                    case 'overlay':
+                        this.outputDivElement.textContent = positionJson;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            var camera = this.getCamera();
+            var raycaster = new THREE.Raycaster();
+            raycaster.setFromCamera(new THREE.Vector2(0, 0), camera);
+            intersects = raycaster.intersectObject(this.panorama, true);
+            if (intersects.length > 0) {
+                var intersect = intersects[0];
+                point = intersect.point;
+                panoramaWorldPosition = this.panorama.getWorldPosition();
 
                 // Panorama is scaled -1 on X axis
                 outputPosition = new THREE.Vector3(
@@ -90,19 +113,20 @@
                     (point.y - panoramaWorldPosition.y).toFixed(2),
                     (point.z - panoramaWorldPosition.z).toFixed(2)
                 );
-                /*
+
+                var lookAtString = " \"lookAt\":[" + outputPosition.x + ', ' + outputPosition.y + ', ' + outputPosition.z + "]";
                 switch (this.options.output) {
                     case 'console':
-                        console.info(outputPosition.x + ', ' + outputPosition.y + ', ' + outputPosition.z);
+                        console.info(lookAtString);
                         break;
                     case 'overlay':
-                        this.outputDivElement.textContent = outputPosition.x + ', ' + outputPosition.y + ', ' + outputPosition.z;
+                        this.outputDivElement.textContent += (lookAtString);
                         break;
                     default:
                         break;
                 }
-                */
             }
+
         }
 
 
